@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Список кімнат</title>
+</head>
+<body>
+    <h1>Система бронювання: Доступні кімнати</h1>
+    <hr>
+    <ul>
+        {% for room in rooms %}
+            <li>
+                <strong>Кімната №{{ room.number }}</strong> — Категорія ID: {{ room.category_id }} (Ціна: {{ room.price }} грн)
+            </li>
+        {% empty %}
+            <li>Кімнат у базі даних поки що немає. Зайдіть в адмінку, щоб додати їх.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
