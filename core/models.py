@@ -38,3 +38,17 @@ class Booking(models.Model):
     def __str__(self):
         return f"{self.guest_name} - {self.room}"
     
+class Review(models.Model):
+    guest_name = models.CharField(max_length=100)
+    text = models.TextField()
+    rating = models.PositiveIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Відгук'
+        verbose_name_plural = 'Відгуки'
+
+    def __str__(self):
+        return f"{self.guest_name} - {self.rating}/5"
+    

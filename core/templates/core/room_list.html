@@ -1,20 +1,99 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список кімнат</title>
+    <style>
+        body {
+            background-image: url("{% static 'background.jpg' %}");
+            
+            background-color: #f4f6f9; 
+            
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px); 
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #cbd5e1;
+            margin: 15px 0;
+        }
+
+        ul {
+            list-index-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background: #ffffff;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 5px solid #3498db; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            color: #333;
+            font-size: 16px;
+        }
+
+        li strong {
+            color: #2c3e50;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
-    <h1>Система бронювання: Доступні кімнати</h1>
-    <hr>
-    <ul>
-        {% for room in rooms %}
-            <li>
-                <strong>Кімната №{{ room.number }}</strong> — Категорія ID: {{ room.category_id }} (Ціна: {{ room.price }} грн)
-            </li>
-        {% empty %}
-            <li>Кімнат у базі даних поки що немає. Зайдіть в адмінку, щоб додати їх.</li>
-        {% endfor %}
-    </ul>
+
+    <div class="container">
+        <h1>Система бронювання: Доступні кімнати</h1>
+        <hr>
+        <ul>
+            {% for room in rooms %}
+                <li>
+                    <strong>Кімната №{{ room.number }}</strong> — Категорія ID: {{ room.category_id }} (Ціна: {{ room.price }} грн)
+                </li>
+            {% empty %}
+                <li class="empty-message">Кімнат у базі даних поки що немає. Зайдіть в адмінку, щоб додати їх.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
 </body>
 </html>
+

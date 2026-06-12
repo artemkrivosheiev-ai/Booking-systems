@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Відгуки</title>
+</head>
+<body>
+
+<h1>Відгуки гостей</h1>
+
+{% for review in reviews %}
+
+    <h2>{{ review.guest_name }}</h2>
+
+    <p>Оцінка: {{ review.rating }}/5</p>
+
+    <p>{{ review.text|truncatechars:100 }}</p>
+
+    <a href="{% url 'review_detail' review.id %}">
+        Детальніше
+    </a>
+
+    <hr>
+
+{% empty %}
+
+    <p>Відгуків поки немає</p>
+
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+
+    <h1 class="mb-4">Відгуки гостей</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Користувач</th>
+                <th>Відгук</th>
+                <th>Оцінка</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for review in reviews %}
+        <tr>
+            <td>{{ review.guest_name }}</td>
+            <td>{{ review.text }}</td>
+            <td>{{ review.rating }}/5</td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>
