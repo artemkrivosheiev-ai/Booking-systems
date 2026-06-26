@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h1>{{ room.name }}</h1>
+
+<p><strong>Опис:</strong> {{ room.description }}</p>
+<p><strong>Ціна:</strong> {{ room.price }} грн</p>
+
+<a href="{% url 'core:create_booking' %}?room_id={{ room.id }}" class="btn btn-primary">
+    Забронювати
+</a>
+
+
+</a>
+{% endblock %}

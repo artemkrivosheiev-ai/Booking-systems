@@ -15,7 +15,7 @@
 
     <p>{{ review.text|truncatechars:100 }}</p>
 
-    <a href="{% url 'review_detail' review.id %}">
+    <a href="{% url 'core:review_detail' review.id %}">
         Детальніше
     </a>
 

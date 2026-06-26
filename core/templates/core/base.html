@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Booking Site{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'core:room_list' %}">Booking Site</a>
+        <ul class="navbar-nav ms-auto">
+            {% if request.user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'core:my_bookings' %}">Мої бронювання</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'core:logout' %}">Вийти</a></li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'core:login' %}?next={{ request.path }}">Увійти</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+
 
 
 class RoomCategory(models.Model):
@@ -26,18 +29,27 @@ class Room(models.Model):
         return f"Кімната {self.number}"
 
 
+class BookingStatus(models.TextChoices):
+    ACTIVE = "active", "Активне"
+    CANCELED = "canceled", "Скасоване"
+
+
 class Booking(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # хто бронює
     guest_name = models.CharField(max_length=100)
     check_in = models.DateField()
     check_out = models.DateField()
-
-    class Meta:
-        ordering = ['check_in']
+    status = models.CharField(
+        max_length=20,
+        choices=BookingStatus.choices,
+        default=BookingStatus.ACTIVE,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.guest_name} - {self.room}"
-    
+        return f"{self.guest_name} – {self.room} ({self.check_in}–{self.check_out})"
+
 class Review(models.Model):
     guest_name = models.CharField(max_length=100)
     text = models.TextField()
@@ -45,10 +57,9 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        verbose_name = "Відгук"
+        verbose_name_plural = "Відгуки"
         ordering = ['-created_at']
-        verbose_name = 'Відгук'
-        verbose_name_plural = 'Відгуки'
 
     def __str__(self):
-        return f"{self.guest_name} - {self.rating}/5"
-    
+        return f"{self.guest_name} ({self.rating}/5)"
